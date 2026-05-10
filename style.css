@@ -549,8 +549,39 @@ body {
     color: #fff;
 }
 
-/* Responsive Design */
+.flower-message {
+    position: fixed;
+    left: 50%;
+    bottom: 8vmin;
+    transform: translateX(-50%) translateY(1.5vmin);
+    color: #ffe4ff;
+    font-size: 2.8vmin;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5vmin 3vmin;
+    border-radius: 2.5vmin;
+    box-shadow: 0 0 3vmin rgba(255, 182, 193, 0.35);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 60;
+    transition: opacity 1s ease, transform 1s ease;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+
+.flower-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 768px) {
+    .flower-message {
+        bottom: 12vmin;
+        font-size: 5vmin;
+        padding: 2.5vmin 3.5vmin;
+        width: min(90vw, 24rem);
+    }
 
     /* Adjust flowers for mobile portrait */
     .flowers {

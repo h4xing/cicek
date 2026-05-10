@@ -1,9 +1,37 @@
 // Wait for the page to fully load
 window.addEventListener('load', () => {
+    initFlowerMessage();
+
     // Small delay to ensure the browser has rendered the initial state
     setTimeout(() => {
         document.body.classList.remove("not-loaded");
     }, 1000);
+
+    function initFlowerMessage() {
+        const flowerLeafGroups = Array.from(document.querySelectorAll('.flower__leafs'));
+        const flowerMessage = document.querySelector('.flower-message');
+        let finishedCount = 0;
+        let messageShown = false;
+
+        if (!flowerMessage || flowerLeafGroups.length === 0) return;
+
+        const showMessage = () => {
+            if (messageShown) return;
+            messageShown = true;
+            flowerMessage.classList.add('show');
+        };
+
+        flowerLeafGroups.forEach(group => {
+            group.addEventListener('animationend', () => {
+                finishedCount += 1;
+                if (finishedCount === flowerLeafGroups.length) {
+                    setTimeout(showMessage, 400);
+                }
+            }, { once: true });
+        });
+
+        setTimeout(showMessage, 5200);
+    }
 
     // Generate Fireflies
     const firefliesContainer = document.querySelector('.fireflies');
